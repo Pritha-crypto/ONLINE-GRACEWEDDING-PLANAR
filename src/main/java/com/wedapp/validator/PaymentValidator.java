@@ -7,7 +7,7 @@ import com.wedapp.model.Payment;
 
 public class PaymentValidator {
 	static ArrayList<String> paymentTypes = new ArrayList<String>();
-	
+
 	/**
 	 * This method checks the input string is valid or not
 	 * 
@@ -18,9 +18,11 @@ public class PaymentValidator {
 		boolean isValid = true;
 		input = input.trim();
 		String specialCharactersString = "!@#$%&*()'+,-./:;<=>?[]^_`{|}";
+		String numbers = "0123456789";
 		for (int i = 0; i < input.length(); i++) {
 			char ch = input.charAt(i);
-			if (input == null || input.equals("") || specialCharactersString.contains(Character.toString(ch))) {
+			if (input == null || input.equals("") || specialCharactersString.contains(Character.toString(ch))
+					|| numbers.contains(Character.toString(ch))) {
 				isValid = false;
 				break;
 			}
@@ -38,7 +40,7 @@ public class PaymentValidator {
 		LocalDate dateObject = LocalDate.parse(expiryDate);
 		LocalDate today = LocalDate.now();
 		boolean isValid = today.isBefore(dateObject);
-		//System.out.println(isValid);
+		// System.out.println(isValid);
 		return isValid;
 	}
 
@@ -187,7 +189,7 @@ public class PaymentValidator {
 	 * details if the deatils are incorrect
 	 */
 	public static ArrayList<String> errorsList(Payment user) {
-		//String otp = null;
+		// String otp = null;
 		ArrayList<String> errorsList = new ArrayList<String>();
 
 		// In the first condition itself, It will return false if it is invalid
@@ -205,40 +207,29 @@ public class PaymentValidator {
 		}
 
 		if (!cvvNoValidation(user.getCvv())) {
-			errorsList.add("Your cvv is invalid") ;
+			errorsList.add("Your cvv is invalid");
 		}
 
 		if (!isValidCardNumber(user.getCardNo())) {
 			errorsList.add("Your card is invalid");
 		}
 
-		//if (errorsList.isEmpty()) {
-		//	int randomPin = (int) (Math.random() * 9000) + 1000;
-		//	otp = String.valueOf(randomPin);
+		// if (errorsList.isEmpty()) {
+		// int randomPin = (int) (Math.random() * 9000) + 1000;
+		// otp = String.valueOf(randomPin);
 
-		//} 
-		
-		
+		// }
+
 		return errorsList;
 	}
-	/*public static String generateOTP(ArrayList<String>errorsList) {
-		String otp=null;
-		if(errorsList.isEmpty()) {
-			int randomPin = (int) (Math.random() * 9000) + 1000;
-		    otp = String.valueOf(randomPin);
-		    System.out.println("Your otp for your transaction is "+ otp);
-		}
-		 if(!errorsList.isEmpty()) {
-			for(int i = 0; i < errorsList.size(); i++) {   
-			    System.out.print(errorsList.get(i));
-			}  
-		}
-
-		return otp;
-	}*/
+	/*
+	 * public static String generateOTP(ArrayList<String>errorsList) { String
+	 * otp=null; if(errorsList.isEmpty()) { int randomPin = (int) (Math.random() *
+	 * 9000) + 1000; otp = String.valueOf(randomPin);
+	 * System.out.println("Your otp for your transaction is "+ otp); }
+	 * if(!errorsList.isEmpty()) { for(int i = 0; i < errorsList.size(); i++) {
+	 * System.out.print(errorsList.get(i)); } }
+	 * 
+	 * return otp; }
+	 */
 }
-
-	
-		
-
-

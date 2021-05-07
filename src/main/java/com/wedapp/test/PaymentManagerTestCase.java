@@ -4,9 +4,6 @@ import com.wedapp.service.*;
 import com.wedapp.validator.*;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -207,11 +204,20 @@ public class PaymentManagerTestCase {
 
 	/**
 	 * This method checks for the valid string of purpose of transaction of amount
-	 * It should true if it a valid string
+	 * It should return false as its a invalid string
 	 */
 	@Test
 	public void purposeValidTest19() {
-		boolean isValid = PaymentValidator.purposeValidation("@#$");
+		boolean isValid = PaymentValidator.purposeValidation("11");
+		assertFalse(isValid);
+	}
+	/**
+	 * This method checks for the valid string of purpose of transaction of amount
+	 * It should return false if it a invalid string
+	 */
+	@Test
+	public void purposeValidTest23() {
+		boolean isValid = PaymentValidator.purposeValidation("1");
 		assertFalse(isValid);
 	}
 
